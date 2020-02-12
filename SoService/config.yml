@@ -1,0 +1,23 @@
+logging:
+  level: INFO
+  loggers:
+    org.fzillo.services: DEBUG
+
+
+database:
+  # the name of your JDBC driver
+  driverClass: com.mysql.cj.jdbc.Driver
+  # the username
+  user: youruser
+  # the password
+  password: yourpassword
+  # the JDBC URL
+  url: jdbc:mysql://localhost:3306/SoServiceDB
+
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: true
+  gzipEnabledForRequests: true
+  chunkedEncodingEnabled: true

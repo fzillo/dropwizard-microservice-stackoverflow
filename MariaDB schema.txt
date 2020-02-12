@@ -1,0 +1,46 @@
+CREATE USER 'youruser'
+  IDENTIFIED BY 'yourpassword';
+GRANT ALL
+  ON *.*
+  TO 'youruser'
+  WITH GRANT OPTION;
+  
+SHOW GRANTS FOR 'youruser';
+
+CREATE DATABASE `SoServiceDB` COLLATE 'utf8mb4_general_ci';
+
+CREATE TABLE `SoServiceDB`.`tag` (
+	`tag_id` INT(20) NOT NULL AUTO_INCREMENT,
+	`value` VARCHAR(255) NOT NULL,
+	`last_modified` DATETIME NOT NULL ,
+	PRIMARY KEY (`tag_id`)
+) COLLATE='utf8mb4_unicode_ci';
+
+CREATE TABLE `SoServiceDB`.`question` (
+	`question_id` INT NOT NULL,
+	`title` VARCHAR(500) NOT NULL,
+	`is_answered` BIT NOT NULL,
+	`view_count` INT NOT NULL,
+	`answer_count` INT NOT NULL,
+	`stackoverflow_creation_date` DATETIME NOT NULL,
+	`user_id` INT NOT NULL,
+	`last_modified` DATETIME NOT NULL,
+	PRIMARY KEY (`question_id`)
+) COLLATE='utf8mb4_unicode_ci';
+
+CREATE TABLE `SoServiceDB`.`question_tag` (
+	`question_id` INT NOT NULL,
+	`tag_id` INT NOT NULL,
+	PRIMARY KEY (`question_id`, `tag_id`),
+	CONSTRAINT `FK__question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
+	CONSTRAINT `FK__tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`)
+) COLLATE='utf8mb4_unicode_ci';
+
+
+INSERT INTO `SoServiceDB`.`tag` (`tag_id`, `value`, `last_modified`) VALUES ('1', 'Tag1', '2020-02-08 21:49:38');
+INSERT INTO `SoServiceDB`.`tag` (`tag_id`, `value`, `last_modified`) VALUES ('2', 'Tag2', '2020-02-09 21:49:38');
+INSERT INTO `SoServiceDB`.`question` (`question_id`, `title`, `is_answered`, `view_count`, `answer_count`, `stackoverflow_creation_date`, `user_id`, `last_modified`) VALUES ('1', 'TitleQuestion1', b'1', '5', '4', '2018-02-06 21:49:34', '4', '2020-02-12 21:49:38');
+INSERT INTO `SoServiceDB`.`question` (`question_id`, `title`, `is_answered`, `view_count`, `answer_count`, `stackoverflow_creation_date`, `user_id`, `last_modified`) VALUES ('2', 'TitleQuestion2', b'0', '3', '200', '2019-02-01 15:00:04', '3', '2020-02-12 15:00:24');
+INSERT INTO `SoServiceDB`.`question_tag` (`question_id`, `tag_id`) VALUES ('1', '1');
+INSERT INTO `SoServiceDB`.`question_tag` (`question_id`, `tag_id`) VALUES ('1', '2');
+INSERT INTO `SoServiceDB`.`question_tag` (`question_id`, `tag_id`) VALUES ('2', '2');
