@@ -30,22 +30,20 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonProperty("tag_id")
+    @JsonProperty("tag_id")
     @Column(name = "tag_id")
     public Integer tag_id;
 
     @JsonProperty("value")
     @Column(name = "value")
-//    @Column(name = "value", unique = true)
     public String value;
 
-    //@JsonProperty("questions")
-    @JsonIgnore //TODO because we want no circular dependency
+    @JsonIgnore // because we want no circular dependency
     @ManyToMany(mappedBy = "tags")
     private Set<Question> questions = new HashSet<>();
 
 
-    @JsonIgnore //TODO comment
+    @JsonIgnore // not relevant for outside
     @UpdateTimestamp
     @Column(name = "last_modified")
     public LocalDateTime db_last_modified;

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 //TODO Exception Handling!
-public class QuestionDAO extends AbstractDAO<Question> {
+public class QuestionDAO extends AbstractDAO<Question> implements IQuestionDAO {
 
     private static final Logger log = LoggerFactory.getLogger(QuestionDAO.class);
 
@@ -22,23 +22,26 @@ public class QuestionDAO extends AbstractDAO<Question> {
         super(sessionFactory);
     }
 
+    @Override
     public Question findById(Integer id) {
         return get(id);
     }
 
 
+    @Override
     public List<Question> createMultiple(List<Question> questionList){
         List<Question> retSavedQuestionList = new ArrayList<>();
 
         //TODO stream
-        for (Question q :questionList){
-            retSavedQuestionList.add(create(q));
+        for (Question question :questionList){
+            retSavedQuestionList.add(create(question));
         }
 
         return retSavedQuestionList;
     }
 
     //TODO comment
+    @Override
     public Question create(Question question) {
         Set<Tag> tags = question.tags;
 
@@ -65,14 +68,17 @@ public class QuestionDAO extends AbstractDAO<Question> {
         return replacedTags;
     }
 
+    @Override
     public void delete(Question question) {
         currentSession().delete(question);
     }
 
+    @Override
     public void deleteAll(){ //TODO this does delete all fks but not Tags
         currentSession().createQuery("delete from Question").executeUpdate();
     }
 
+    @Override
     public void deleteById(Integer id) {
         Question question = currentSession().load(Question.class, id);
 
@@ -83,11 +89,13 @@ public class QuestionDAO extends AbstractDAO<Question> {
         }
     }
 
+    @Override
     public List<Question> findAll() {
         return (List<Question>) namedQuery("org.fzillo.services.api.Question.findAll").list();
     }
 
 
+    @Override
     public List<Question> findAllWithTag(String tag) {
         return (List<Question>) namedQuery("org.fzillo.services.api.Question.findAllWithTag").setParameter("value", tag).list();
     }

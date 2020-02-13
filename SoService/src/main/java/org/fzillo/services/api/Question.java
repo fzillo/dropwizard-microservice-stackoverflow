@@ -51,7 +51,8 @@ public class Question {
     public String title;
 
 //    @JsonDeserialize(using = CustomTagSerializer.class)
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH })
+    @ManyToMany(cascade = CascadeType.ALL)
+    //@ManyToMany(cascade = { CascadeType.PERSIST,  CascadeType.MERGE, CascadeType.DETACH })
     @JoinTable(
             name = "question_tag",
             joinColumns = { @JoinColumn(name = "question_id") },
