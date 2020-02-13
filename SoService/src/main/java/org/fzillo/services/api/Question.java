@@ -28,6 +28,18 @@ public class Question {
         //keep default Constructor for Hibernates sake
     }
 
+    public Question (Integer question_id, String title, Set<Tag> tags, Boolean is_answered, Integer view_count,
+                     Integer answer_count, LocalDateTime stackoverflow_creation_date, Integer user_id){
+        this.question_id = question_id;
+        this.title = title;
+        this.tags = tags;
+        this.is_answered = is_answered;
+        this.view_count = view_count;
+        this.answer_count = answer_count;
+        this.stackoverflow_creation_date = stackoverflow_creation_date;
+        this.user_id = user_id;
+    }
+
     @Id
     @JsonProperty("question_id")
     @Column(name = "question_id")

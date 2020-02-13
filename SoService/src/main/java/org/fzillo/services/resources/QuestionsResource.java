@@ -126,7 +126,7 @@ public class QuestionsResource {
                         .request(MediaType.APPLICATION_JSON).get(QuestionResponseWrapper.class);
 
         if (!questionResponseWrapper.questionList.isEmpty()) {
-            List<Question> questionList = questionResponseWrapper.getFirstTwentyItems();
+            List<Question> questionList = questionResponseWrapper.getLimitedQuestionList();
             questionDAO.createMultiple(questionList);
         } else {
             //TODO log warning

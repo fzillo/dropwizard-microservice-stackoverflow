@@ -9,14 +9,15 @@ import java.util.stream.Collectors;
 //TODO comment
 public class QuestionResponseWrapper {
 
+    public static int LIMIT_QUESTIONLIST = 20;
+
     @JsonProperty("items")
     public List<Question> questionList;
 
-    public List<Question> getFirstTwentyItems(){
+    public List<Question> getLimitedQuestionList(){
         if (questionList != null) {
-            return questionList.stream().limit(20).collect(Collectors.toList());
+            return questionList.stream().limit(LIMIT_QUESTIONLIST).collect(Collectors.toList());
         }
-
         return new ArrayList<Question>();
     }
 

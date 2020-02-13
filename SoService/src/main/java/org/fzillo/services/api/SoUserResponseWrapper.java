@@ -14,7 +14,6 @@ public class SoUserResponseWrapper {
         if (userList != null && !userList.isEmpty()){
             return userList.get(0);
         }
-
         return null;
     }
 

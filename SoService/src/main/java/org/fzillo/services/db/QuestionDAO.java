@@ -42,8 +42,18 @@ public class QuestionDAO extends AbstractDAO<Question> {
     public Question create(Question question) {
         Set<Tag> tags = question.tags;
 
-        //TODO stream
+        Set<Tag> replacedTags = replaceExistingTags(tags);
+
+        currentSession().evict(question); //otherwise Hibernate throws NonUniqueException when you modify the object
+        question.tags = replacedTags;
+
+        return persist(question);
+    }
+
+    private Set<Tag> replaceExistingTags(Set<Tag> tags) {
         Set<Tag> replacedTags = new HashSet<>();
+
+        //TODO stream
         for (Tag t : tags) {
             List<Tag> foundTags = (List<Tag>) namedQuery("org.fzillo.services.api.Tag.FindByValue").setParameter("value", t.value).list();
             if (!foundTags.isEmpty()){
@@ -52,11 +62,7 @@ public class QuestionDAO extends AbstractDAO<Question> {
                 replacedTags.add(t);
             }
         }
-
-        currentSession().evict(question); //otherwise Hibernate throws NonUniqueException when you modify the object
-        question.tags = replacedTags;
-
-        return persist(question);
+        return replacedTags;
     }
 
     public void delete(Question question) {

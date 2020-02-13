@@ -13,6 +13,12 @@ public class SoUser {
     //TODO getters/setters?
     //TODO public/private
 
+    public SoUser (Integer user_id, String display_name, LocalDateTime creation_date_stackoverflow){
+        this.user_id = user_id;
+        this.display_name = display_name;
+        this.creation_date_stackoverflow = creation_date_stackoverflow;
+    }
+
     @JsonProperty("user_id")
     public Integer user_id;
 
