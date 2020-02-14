@@ -50,8 +50,7 @@ public class Question {
     @Column(name = "title")
     public String title;
 
-//    @JsonDeserialize(using = CustomTagSerializer.class)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL) //TODO check for fk constraint violations
     //@ManyToMany(cascade = { CascadeType.PERSIST,  CascadeType.MERGE, CascadeType.DETACH })
     @JoinTable(
             name = "question_tag",

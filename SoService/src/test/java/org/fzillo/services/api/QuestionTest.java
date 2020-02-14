@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 public class QuestionTest {
 
     @Test
-    public void unpackNestedTags_CONTAINS_VALUES() {
+    public void unpackNestedTags_returnStringValuesAsTagList() {
 
         Question question = new Question();
 
@@ -29,7 +29,7 @@ public class QuestionTest {
     }
 
     @Test
-    public void unpackNestedUserId_CONTAINS_VALUE() {
+    public void unpackNestedUserId_returnLinkedHashMapValueAsUser() {
 
         Question question = new Question();
         Integer userId = 1;

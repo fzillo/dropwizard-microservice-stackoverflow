@@ -15,7 +15,7 @@ public class QuestionResponseWrapperTest {
     public static int DEFAULT_SIZE_QUESTIONLIST_STACKOVERFLOW = 30;
 
     @Test
-    public void getLimitedQuestionList_RETURNS_LIMITED_LIST() {
+    public void getLimitedQuestionList_returnLimitedList() {
         QuestionResponseWrapper wrapper = createQuestionResponseWrapperForTesting();
 
         assertNotNull(wrapper.getLimitedQuestionList());
@@ -23,7 +23,7 @@ public class QuestionResponseWrapperTest {
     }
 
     @Test
-    public void getLimitedQuestionList_RETURNS_EMPTY_LIST() {
+    public void getLimitedQuestionList_returnEmptyList() {
         QuestionResponseWrapper wrapper = new QuestionResponseWrapper();
 
         assertNotNull(wrapper.getLimitedQuestionList());

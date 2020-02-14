@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -24,12 +25,12 @@ public class CustomLocalDateTimeDeserializer extends StdDeserializer<LocalDateTi
     @Override
     public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String timestamp = jsonParser.getText().trim();
-        long longValue = Long.valueOf(timestamp);
         try {
-                return LocalDateTime.ofInstant(Instant.ofEpochSecond(longValue), ZoneId.of("UTC"));
+            long longValue = Long.valueOf(timestamp);
+            return LocalDateTime.ofInstant(Instant.ofEpochSecond(longValue), ZoneId.of("UTC"));
         } catch (NumberFormatException e) {
-                        //logger.warn('Unable to deserialize timestamp: ' + timestamp, e)   //TODO
-                        return null;
+            log.warn("Unable to deserialize timestamp: " + timestamp, e) ;
+            return null;
         }
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class SoUserResponseWrapperTest {
 
     @Test
-    public void getUser_RETURNS_USER() {
+    public void getUser_returnUser() {
         SoUserResponseWrapper soUserResponseWrapper = new SoUserResponseWrapper();
 
         List<SoUser> userList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class SoUserResponseWrapperTest {
     }
 
     @Test
-    public void getUser_RETURNS_NULL() {
+    public void getUser_returnNull() {
         SoUserResponseWrapper soUserResponseWrapper = new SoUserResponseWrapper();
 
         assertNull(soUserResponseWrapper.getUser());

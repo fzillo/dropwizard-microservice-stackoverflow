@@ -52,7 +52,7 @@ public class StackOverflowServiceApplication extends Application<StackOverflowSe
         StackOverflowClient stackOverflowClient = new StackOverflowClient(client);
 
         //TODO QuestionInitializer needs stackOverflowClient
-        QuestionInitializer questionInitializer = new QuestionInitializer(stackOverflowClient, questionDAO);
+        QuestionInitializer questionInitializer = new QuestionInitializer(hibernate.getSessionFactory(),stackOverflowClient, questionDAO);
         //QuestionInitializer questionInitializer = new UnitOfWorkAwareProxyFactory(hibernate).create(QuestionInitializer.class, QuestionDAO.class, questionDAO);
 
 
